@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Buy form</title>
+</head>
+<body>
+
+<div id="buy">
+    <button id="button_buy">Купить</button>
+</div>
+
+
+<form id="form" style="display: none">
+    <input type="text" id="user_name">
+    <input type="text" id="last_name">
+    <button id="order">Отправить</button>
+</form>
+
+<script src="https://telegram.org/js/telegram-web-app.js"></script>
+
+<script>
+    let tg = window.Telegram.WebApp;
+    let buy_button = document.getElementById("buy");
+    let order_button = document.getElementById("order");
+    // tg.expand();
+
+    buy_button.addEventListener("click", () => {
+        document.getElementById("buy").style.display = "none";
+        document.getElementById("form").style.display = "block";
+        let my_name = tg.initDataUnsafe.user.first_name;
+        document.getElementById("user_name").value = my_name;
+        let my_surname = tg.initDataUnsafe.user.last_name;
+        document.getElementById("last_name").value = my_surname;
+
+    });
+
+    order_button.addEventListener("click", () => {
+        let name = document.getElementById("user_name").value;
+        let last_name = document.getElementById("last_name").value;
+
+        if (name.length < 3) {
+            document.getElementById("error").value = "Ошибка в имени";
+        });
+
+        let data = {
+            name: name,
+            last_name: last_name
+        });
+
+     order_button.addEventListener("click", () => {
+        let name = document.getElementById("last_name").value;
+        let last_name = document.getElementById("last_name").value;
+
+        if (name.length < 3) {
+            document.getElementById("error").value = "Ошибка в имени";
+        });
+
+        let data = {
+            name: name,
+            last_name: last_name
+        });
+
+
+        tg.send(JSON.stringify(data)):
+
+        tg.close()
+    });
+
+</script>
+
+</body>
+</html>
